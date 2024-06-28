@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form'
 
+import { FormTextField } from '@/components/ui/form/FormTextField'
 import { FormCheckbox } from '@/components/ui/form/form-checkbox'
 import { TextField } from '@/components/ui/text-field'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -28,9 +29,6 @@ export const LoginForm = () => {
   const onSubmit = handleSubmit(data => {
     console.log(data)
   })
-  // const {
-  //   field: { onChange, value },
-  // } = useController({ control, name: 'rememberMe' })
 
   return (
     <form onSubmit={onSubmit}>
@@ -40,14 +38,7 @@ export const LoginForm = () => {
         label={'Email'}
         placeholder={'email'}
       />
-      <TextField
-        {...register('password')}
-        errorMessage={errors?.password?.message}
-        label={'Password'}
-        minLength={3}
-        placeholder={'password '}
-        type={'password'}
-      />
+      <FormTextField control={control} label={'Password'} name={'password'} />
       <FormCheckbox control={control} label={'RememberMe'} name={'rememberMe'} />
       <Button type={'submit'}>Submit</Button>
     </form>
