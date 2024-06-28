@@ -1,11 +1,11 @@
-import { FieldValues, UseControllerProps, useController } from 'react-hook-form'
+import { FieldValues, UseControllerProps, useController, useForm } from 'react-hook-form'
+
+import { FormValues, loginSchema } from '@/components/auth/login-form/login-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 import { TextField, TextFieldProps } from '../text-field'
 
-type Props<T extends FieldValues> = Omit<
-  TextFieldProps,
-  ' disabled' | 'checked' | 'errorMessage' | 'name' | 'onBlur' | 'onCheckedChange' | 'ref'
-> &
+type Props<T extends FieldValues> = Omit<TextFieldProps, ' placeholder' | 'errorMessage'> &
   UseControllerProps<T>
 
 export const FormTextField = <T extends FieldValues>({
@@ -18,19 +18,17 @@ export const FormTextField = <T extends FieldValues>({
   ...restProps
 }: Props<T>) => {
   const {
-    field: { onChange, value, ...field },
     fieldState: { error },
   } = useController({ control, defaultValue, disabled, name, rules, shouldUnregister })
+
+  console.log(error)
 
   return (
     <TextField
       {...restProps}
-      checked={value}
       errorMessage={error?.message}
-      label={'Password'}
       placeholder={'password '}
       type={'password'}
-      {...field}
     />
   )
 }

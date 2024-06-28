@@ -8,9 +8,11 @@ import { z } from 'zod'
 
 import { Button } from '../../ui/button'
 
-const loginSchema = z.object({
+export const passwordXXX = z.string().min(3).max(30)
+
+export const loginSchema = z.object({
   email: z.string().email(),
-  password: z.string().min(3).max(30),
+  password: passwordXXX,
   rememberMe: z.boolean().optional(),
 })
 
